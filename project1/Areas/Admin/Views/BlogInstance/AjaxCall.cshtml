@@ -1,0 +1,219 @@
+﻿
+<style>
+    .loader{
+        min-width: 100vw;
+        width: 100%;
+        min-height: 100vh;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background: white;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity:.6;
+    }
+    .loader img{
+        width:50px;
+    }
+
+</style>
+<h3>Ajax Call</h3>
+<div class="d-flex">
+    <button class="btn btn-light" onclick="Add(0)">Add</button>
+</div>
+<div id="ajaxLoader" class="loader d-none">
+    <img src="https://i.gifer.com/ZZ5H.gif" />
+</div>
+<div id="AjaxContainer">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>واقعات</th>
+                <th>مختصر تعارف</th>
+                <th>ایشو</th>
+                <th>تاریخ</th>
+                <th colspan="2" class="text-center">رد وبدل</th>
+            </tr>
+        </thead>
+        <tbody id="instancetable">
+         
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a  class=" btn btn-success pointer p-2">Edit</a></td>
+                    <td><a class="btn btn-danger pointer p-2">Del</a></td>
+                </tr>
+
+        </tbody>
+    </table>
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="CreateUpdateModalId" class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="submitInstance()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+
+function val(a){
+  let values  =  document.getElementById(a).value;
+  return values
+}
+    var getAllApi = 'AjaxGetAll';
+    $(document).ready(function(){
+    loadLoader();
+        Ajaxx(getAllApi, table);
+    });
+   
+    function Ajaxx(api, returnMethod){
+        loadLoader();
+
+            $.ajax({
+                url: `https://localhost:44347/Admin/BlogInstance/${api}`,
+                method: 'GET',
+                success: function (response) {
+                    returnMethod(response);
+                    removeLoader()
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors here
+                    console.error(error);
+                    removeLoader()
+                }
+            });
+
+
+     
+    }
+
+    function table(a){
+        let tab='';
+        for (item of a.blogInstances) {
+           tab += `<tr><td>${item.instanceName}</td><td>${item.instanceDescription}</td><td>${item.instanceOfIssue}</td>
+                    <td>${item.occuranceDate}</td><td><a onclick="update(${item.instanceId})" class=" btn btn-success pointer p-2">Edit</a></td>
+                    <td><a class="btn btn-danger pointer p-2">Del</a></td></tr>`
+                }
+                document.getElementById('instancetable').innerHTML = tab;
+        }
+
+    function update(a){
+        let responcess ;
+        loadLoader();
+        $.ajax({
+            url: `https://localhost:44347/Admin/BlogInstance/AjaxCreateUpdate/${a}`,
+            method: 'GET',
+            success: function (response) {
+                console.log(response);
+                document.getElementById('CreateUpdateModalId').innerHTML=modalInner(response);
+                ShowModal();
+                removeLoader()
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    
+    }
+    function Add(){
+        document.getElementById('CreateUpdateModalId').innerHTML = modalInner(0);
+        ShowModal();
+    }
+    function modalInner(a = 0) {
+        let date2;
+        if (a != 0) {
+            date2 = new Date(a.blogInstance.occuranceDate);
+        }
+        else {
+            date2 = new Date();
+        }
+        let NewDate = `${date2.getFullYear()}-${date2.getMonth()}-${date2.getDate()}`;
+
+        let modalData = `<form><div class="mb-3"> <input type="text" class="form-control visually-hidden" id="InstanceId" value ="${a == 0 ? 0 : a.blogInstance.instanceId}"  aria-describedby="emailHelp">
+                                        <label for="exampleInputEmail1" class="form-label">instance Name</label>
+                                            <input type="text" class="form-control" id="InstanceName" value ="${a == 0 ? "" : a.blogInstance.instanceName}"  aria-describedby="emailHelp">
+                                        </div><div class="mb-3"><label for="exampleInputEmail1" class="form-label">occurance Date</label>
+                                            <input type="Date" class="form-control" value="${a == 0 ? "" : NewDate}" id="occuranceDate" aria-describedby="emailHelp"></div>
+                                            <select class="form-select" id="instanceOfIssue" aria-label="Default select example"><option selected>Open this select menu</option>`
+       if(a != 0){
+            for (item of a.instanceOfIssue) {
+                modalData += `<option value="${a == 0 ? "" : item.value}">${item.text}</option>`
+            }
+       }
+        modalData += `</select><div class=" mb-3"><label for="exampleInputEmail1" class="form-label d-block"> Detail</label>
+                                              <textarea class="class="form-control w-100" value="" id="instanceDescription">${a == 0 ? "" : a.blogInstance.instanceDescription}</textarea>
+                                      </div></form>`
+
+        return modalData;
+    }
+ function loadLoader(){
+      document.getElementById('ajaxLoader').classList.remove('d-none');
+  }
+ function removeLoader(){
+     document.getElementById('ajaxLoader').classList.add('d-none');
+ }
+ function ShowModal(){ 
+   $('#myModal').modal('show');
+ }
+ 
+ function HideModal(){
+    $('#myModal').modal('hide');
+ }
+
+
+ function submitInstance(){
+        loadLoader();
+        let nstanceId = val('InstanceId');
+        let nstanceName = val('InstanceName');
+        let ccuranceDate = val('occuranceDate');
+        let nstanceOfIssue = val('instanceOfIssue');
+        let nstanceDescription = val('instanceDescription');
+        debugger
+        $.ajax({
+            url: 'https://localhost:44347/Admin/BlogInstance/AjaxCreateUpdate',  
+            type: 'POST',
+            data: {
+                   InstanceId: nstanceId,
+                   InstanceName : nstanceName,
+                   occuranceDate : ccuranceDate,
+                   BlogIssueId: nstanceOfIssue,
+                   instanceDescription : nstanceDescription,
+            },
+            success: function (response) {
+               
+
+                console.log(response);
+                HideModal();
+            },
+            error: function (xhr, status, error) {
+             
+                console.log(error);
+            }
+        });
+
+        removeLoader()
+ }
+
+</script>

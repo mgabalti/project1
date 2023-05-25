@@ -1,0 +1,57 @@
+﻿@model MyApp.Models.ViewModels.BlogInstanceVM
+
+@{
+    ViewData["Title"] = "EditCategory";
+    var creatUpdate = Model.blogInstance == null || Model.blogInstance.InstanceId == 0 ? "Create" : "update";
+    var creatUpdateUrdu = Model.blogInstance == null || Model.blogInstance.InstanceId == 0 ? "بنائیں" : "تبدیل کریں";
+
+}
+
+<h1 class="text-capitalize"> واقعہ @creatUpdateUrdu </h1>
+
+<h4>واقعہ</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-area="Admin" asp-controller="BlogInstance" asp-action="CreateUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="blogInstance.InstanceId" />
+
+            <div class="form-group">
+                <label asp-for="blogInstance.InstanceName" class="control-label">ایسو </label>
+                <input asp-for="blogInstance.InstanceName" class="form-control" />
+                <span asp-validation-for="blogInstance.InstanceName" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mt-3">
+                <label asp-for="blogInstance.OccuranceDate" class="control-label">ایسو </label>
+                <input asp-for="blogInstance.OccuranceDate" class="form-control" />
+                <span asp-validation-for="blogInstance.OccuranceDate" class="text-danger"></span>
+            </div>
+
+             <div class="form-group mt-3">
+                <label asp-for="blogInstance.BlogIssueId" class="control-label">ایسو </label>
+                <select asp-for="blogInstance.BlogIssueId" class="form-control" asp-items="Model.InstanceOfIssue">
+                  <option selected disabled> Select</option>
+                </select>
+                <span asp-validation-for="blogInstance.OccuranceDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <label asp-for="blogInstance.InstanceDescription" class="control-label"> تعارف </label>
+                <textarea asp-for="blogInstance.InstanceDescription" class="form-control"></textarea>
+                <span asp-validation-for="blogInstance.InstanceDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="@creatUpdateUrdu" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

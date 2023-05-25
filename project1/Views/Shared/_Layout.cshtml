@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - project1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/project1.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" asp-append-version="true" />
+    <link href="~/lib/dropify/css/dropify.css" rel="stylesheet" />
+    <link href="~/lib/summernote/summernote-lite.css" rel="stylesheet" />
+   
+   
+</head>
+<body dir="rtl">
+    <partial name="_Navbar"/>
+   <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <partial name="_footer"/>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" ></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/summernote/summernote-lite.js"></script>
+    <script src="~/lib/moment.js/moment.js"></script>
+    <script src="~/lib/color-thief/color-thief.js"></script>
+    <script src="~/lib/color-thief/color-thief.umd.js"></script>
+    <script src="~/lib/moment.js/moment-with-locales.min.js"></script>
+    <script src="~/lib/dropify/js/dropify.min.js"></script>
+
+    
+    
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/main.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+  <script>
+       
+  </script>
+</body>
+</html>

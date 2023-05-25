@@ -1,0 +1,96 @@
+﻿@model MyApp.Models.ViewModels.BlogPostVM
+
+<h4>BlogPost</h4>
+<hr />
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form asp-controller="Home" enctype="multipart/form-data" asp-action="CreateUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-3">
+                <label asp-for="blogPost.posttitle" class="control-label">ہیڈ لائن</label>
+                <input asp-for="blogPost.posttitle" class="form-control" />
+                <span asp-validation-for="blogPost.posttitle" class="text-danger"></span>
+            </div>
+            
+           
+           
+          
+           <div class="d-flex gap-3">
+                <div class="form-group mt-3 w-100">
+                <label asp-for="blogPost.postauther" class="control-label">نمائندہ</label>
+                <input asp-for="blogPost.postauther" class="form-control" />
+                <span asp-validation-for="blogPost.postauther" class="text-danger"></span>
+            </div>
+          </div>
+            <div class="input-group mt-3">
+                    <label class="input-group-text" for="PostCategory">category</label>
+                <select class="form-select" asp-for="blogPost.postcategory" asp-items="Model.selectLstItem">
+                        <option selected> select category</option>
+                    </select>
+           </div>
+           <div class="input-group mt-3">
+                    <label class="input-group-text" for="PostCategory">issue</label>
+                <select class="form-select" onchange="FetchInstance(this)" asp-for="blogPost.postIssue" asp-items="Model.blogIssueVM">
+                        <option selected > select category</option>
+                    </select>
+           </div>
+           <div class="input-group mt-3">
+                    <label class="input-group-text" for="PostCategory">instance</label>
+                <select class="form-select" asp-for="blogPost.postInstance" id="PostIssueId"  >
+                        <option selected> select instance</option>
+                    </select>
+           </div>
+            <div class="form-group mt-3">
+                <label asp-for="blogPost.postimageurl" class="control-label">تصویر</label>
+                <input type="file" name="PostImageURLName" class="form-control CustomUpload" />
+                <span asp-validation-for="blogPost.postimageurl" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="blogPost.postbodyhtml" class="control-label">تفصیل</label>
+                <textarea asp-for="blogPost.postbodyhtml" class="form-control summernote"></textarea>
+                <span asp-validation-for="blogPost.postbodyhtml" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3 form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="blogPost.postpublish" /> @Html.DisplayNameFor(model => model.blogPost.postpublish)
+                </label>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+function FetchInstance(that){
+        fetch(`https://localhost:44347/Home/fetchInstance/${that.value}`)
+            .then(response => response.json())
+            .then(json => makeIssue(json))
+}
+
+function makeIssue(a){
+        console.log(a);
+        let Inner =''
+        let select = document.getElementById('PostIssueId');
+            if(a !=null || a.length != 0){
+                for (iss of a) {
+                    Inner += `<option value="${iss.value}">${iss.text}</option>`
+                }
+            }
+            
+            else{
+                Inner += `<option>Instace not Found</option>`
+            }
+            select.innerHTML = Inner
+        }
+
+</script>

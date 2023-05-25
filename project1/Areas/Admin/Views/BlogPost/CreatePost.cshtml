@@ -1,0 +1,44 @@
+﻿@model MyApp.Models.BlogPost
+
+
+
+<h1>CreateCategory</h1>
+
+<h4>PostCategories</h4>
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="BlogPost" asp-action="CreatePost">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group my-4">
+                <label asp-for="posttitle">Title</label>
+                <input type="text" asp-for="posttitle" class="form-control mt-3" />
+                <span asp-validation-for="posttitle" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea class="form-control" asp-for="postbodyhtml" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <label asp-for="postbodyhtml" for="floatingTextarea2">Comments</label>
+            </div>
+
+            <div class="mb-3">
+                <label for="formFile"  class="form-label">Default file input example</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <div class="form-check mb-3">
+                <input class="" asp-for="postpublish" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label pe-2" asp-for="postpublish" for="flexCheckDefault">اشاعت کریں
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

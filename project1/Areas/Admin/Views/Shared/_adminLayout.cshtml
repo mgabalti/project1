@@ -1,0 +1,68 @@
+﻿<!doctype html>
+<html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="light" data-sidebar-size="lg" data-sidebar-image="none" data-preloader="disable">
+
+
+<!-- Mirrored from themesbrand.com/hybrix/html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 05 Apr 2023 21:43:55 GMT -->
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dashboard | Hybrix - Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Minimal Admin & Dashboard Template" name="description" />
+    <meta content="Themesbrand" name="author" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Admin/images/favicon.ico">
+
+    <!-- jsvectormap css -->
+    <link href="~/Admin/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet" type="text/css" />
+
+    <!--Swiper slider css-->
+    <link href="~/Admin/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- Layout config Js -->
+    <script src="~/Admin/js/layout.js"></script>
+    <!-- Bootstrap Css -->
+    <link href="~/Admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="~/Admin/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="~/Admin/css/app.min.css" rel="stylesheet" type="text/css" />
+    <!-- custom Css-->
+    <link href="~/Admin/css/custom.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body dir="rtl">
+    
+    <div id="layout-wrapper" class="d-flex">
+            <partial name="_adminNavbar" />
+        <main role="main" class="main-content pb-3 flex-grow-1">
+
+         <partial name="_TopNav" />
+            <div class="page-content">
+
+            @RenderBody()
+            </div>
+        </main>
+    </div>
+        <script src="~/Admin/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/Admin/libs/simplebar/simplebar.min.js"></script>
+        <script src="~/Admin/js/pages/plugins/lord-icon-2.1.0.js"></script>
+        <script src="~/Admin/js/plugins.js"></script>
+
+        <!-- apexcharts -->
+        <script src="~/Admin/libs/apexcharts/apexcharts.min.js"></script>
+
+        <!-- Vector map-->
+        <script src="~/Admin/libs/jsvectormap/js/jsvectormap.min.js"></script>
+        <script src="~/Admin/libs/jsvectormap/maps/world-merc.js"></script>
+
+        <!--Swiper slider js-->
+        <script src="~/Admin/libs/swiper/swiper-bundle.min.js"></script>
+
+        <!-- Dashboard init -->
+        <script src="~/Admin/js/pages/dashboard-ecommerce.init.js"></script>
+
+        <!-- App js -->
+        <script src="~/Admin/js/app.js"></script>
+</body>
+</html>

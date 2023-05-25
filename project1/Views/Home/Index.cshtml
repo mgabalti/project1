@@ -1,0 +1,135 @@
+﻿    @using MyApp.Models;
+    @model MyApp.Models.BlogPost;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="post post-thumb main-post mt-3">
+    <a class="post-img " href="blog-post.html"><img class="dynamicColor" src="img/post-2.jpg" alt=""></a>
+    <div class="post-body colorApplication w-100">
+        <div class="post-meta">
+            <a class="post-category cat-3" href="category.html">مشرقی وسطیٰ</a>
+            <span class="post-date">March 27, 2018</span>
+        </div>
+        <h3 class="post-title"><a class="fs-1" href="blog-post.html">توشہ خانہ کیس میں فرد جرم کی کارروائی مؤخر، عمران خان 30 مارچ کو طلب</a></h3>
+        <p class="fs-3 text-white mt-3">اسلام آباد کی ضلعی عدالت نے توشہ خانہ کیس میں عمران خان پر فرد جرم کی کارروائی مؤخر کرتے ہوئے مقدمے کی سماعت 30 مارچ تک ملتوی کر دی ہے۔</p>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="section-title">
+            <h2>تازہ ترین</h2>
+        </div>
+    </div>
+     @for (int i = 0; i < 6; i++)
+            {
+                var a = i+1;
+                var b = a.ToString() + ".jpg";
+        <div class="col-md-4">
+            <div class="post">
+                <a class="post-img" href="blog-post.html"><img class="dynamicColor" src="img/post-@b" alt=""></a>
+                <div class="post-body">
+                    <div class="post-meta">
+                        <a class="post-category cat-@a" href="category.html">پاکستانی</a>
+                        <span class="post-date dateInUr">2022-03-25</span>
+                    </div>
+                    <h3 class="post-title">
+                        <a href="blog-post.html" class="colorApplication">
+                            محمد اقبال: وہ شخص جس کی زمان پارک میں موجودگی پر مخالف عمران خان پر تنقید کر رہے ہیں
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+}
+   
+
+</div>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2>پاکستانی</h2>
+                </div>
+            </div>
+           
+          
+            @for (int i = 0; i < 3; i++)
+            {
+                var a = i+1;
+                var b = a.ToString() + ".jpg";
+                <div class="col-md-12">
+                    <div class="post post-row">
+                        <a class="post-img" href="blog-post.html"><img src="img/post-@b" alt=""></a>
+                        <div class="post-body">
+                            <div class="post-meta">
+                                <a class="post-category cat-2" href="category.html">پاکستانی</a>
+                                <span class="post-date">March 27, 2018</span>
+                            </div>
+                            <h3 class="post-title"><a href="blog-post.html">زمان پارک: پولیس اور رینجرز کے دستے ایک بار پھر عمران خان کی رہائشگاہ پہنچ گئے</a></h3>
+                            <p>
+                                سیشن جج ظفر اقبال کے مطابق 30 مارچ کو کیس کے قابل سماعت ہونے پر دلائل دیے جائیں گے۔
+
+                                واضح رہے کہ آج سماعت کے دوران عمران خان کی حاضری کی دستاویز کے گم ہونے کا معاملہ بھی سامنے آیا جب عدالت کے استفسار پر یہ بات پتہ چلی کہ پولیس اور عمران خان کے وکلا دونوں میں سے کسی کے پاس بھی وہ فائل موجود نہیں ہے۔
+
+                                خواجہ حارث نے بی بی سی کو بتایا کہ جب فائل پر دستخط کروائے گئے
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <div class="col-md-12">
+                <div class="section-row">
+                    <button class="primary-button center-block">Load More</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="aside-widget text-center">
+            <a href="#" style="display: inline-block;margin: auto;">
+                <img class="img-responsive" src="img/ad-1.jpg" alt="">
+            </a>
+        </div>
+
+
+        <div class="aside-widget">
+            <div class="section-title">
+                <h2>Catagories</h2>
+            </div>
+            <div class="category-widget">
+                <ul>
+                    <li><a href="#" class="cat-1 align-items-center cat-1 d-flex justify-content-between">کھیل<span>340</span></a></li>
+                    <li><a href="#" class="cat-2 align-items-center cat-1 d-flex justify-content-between">پاکستانی<span>74</span></a></li>
+                    <li><a href="#" class="cat-4 align-items-center cat-1 d-flex justify-content-between">مشرقی وسطیٰ<span>41</span></a></li>
+                    <li><a href="#" class="cat-3 align-items-center cat-1 d-flex justify-content-between">بین الاقوامی<span>35</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="aside-widget">
+            <div class="tags-widget">
+                <ul>
+                
+                    <li><a href="#">بین الاقوامی</a></li>
+                 
+                    <li><a href="#">مشرقی وسطیٰ</a></li>
+                    <li><a href="#">تفریح</a></li>
+             
+                    <li><a href="#">پاکستانی</a></li>
+                 
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

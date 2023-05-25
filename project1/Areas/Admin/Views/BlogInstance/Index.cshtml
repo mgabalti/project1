@@ -1,0 +1,38 @@
+﻿@model MyApp.Models.ViewModels.BlogInstanceVM;
+@{
+    ViewData["Title"] = "Index";
+
+}
+@if (TempData["success"] != null)
+{
+
+        <h3> @TempData["success"]</h3>
+}
+<h1>واقعات</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>واقعات</th>
+            <th>مختصر تعارف</th>
+            <th>تاریخ</th>
+            <th>ایشو</th>
+            <th colspan="2" class="text-center">رد وبدل</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.blogInstances)
+        {
+                <tr>
+                    <td>@item.InstanceName</td>
+                    <td>@item.InstanceDescription</td>
+                    <td>@item.InstanceOfIssue</td>
+                <td>@item.OccuranceDate</td>
+                <td></td>
+                    <td><a asp-controller="BlogInstance" asp-action="CreateUpdate" asp-route-id="@item.InstanceId" class=" btn btn-success pointer p-2">Edit</a></td>
+                <td><a asp-controller="BlogInstance" asp-action="Del" asp-route-id="@item.InstanceId" class="btn btn-danger pointer p-2">Del</a></td>
+                </tr>
+
+        }
+    </tbody>
+</table>

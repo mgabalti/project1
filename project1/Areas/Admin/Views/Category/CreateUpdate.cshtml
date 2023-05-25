@@ -1,0 +1,41 @@
+﻿@model MyApp.Models.ViewModels.CategoryVM
+
+@{
+    ViewData["Title"] = "EditCategory";
+    var creatUpdate = Model.PostCategory == null || Model.PostCategory.Id == 0 ? "Create" : "update";
+    var creatUpdateUrdu = Model.PostCategory == null || Model.PostCategory.Id == 0 ? "بنائیں" : "تبدیل کریں";
+
+}
+
+<h1 class="text-capitalize">درجہ بندی @creatUpdateUrdu </h1>
+
+<h4>PostCategory</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-area="Admin" asp-controller="Category" asp-action="CreateUpdate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PostCategory.Id"/>
+
+            <div class="form-group">
+                <label asp-for="PostCategory.CatName" class="control-label">کیٹیگیری </label>
+                <input asp-for="PostCategory.CatName" class="form-control" />
+                <span asp-validation-for="PostCategory.CatName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="PostCategory.CatCreatedDate" class="control-label mb-2">تاریخ</label>
+                <input asp-for="PostCategory.CatCreatedDate" class="form-control eng" />
+                <span asp-validation-for="PostCategory.CatCreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@creatUpdate" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
